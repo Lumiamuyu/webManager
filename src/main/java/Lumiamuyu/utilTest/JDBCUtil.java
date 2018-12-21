@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JDBCUtil {
-    private static final String URL="jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=utf8";
+    private static final String URL="jdbc:mysql://127.0.0.1:3306/webmanager_db?useUnicode=true&characterEncoding=utf8";
     private static final String USER ="root";
     private static final String PWD ="123456";
 

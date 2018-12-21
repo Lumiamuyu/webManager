@@ -7,236 +7,465 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 
 <head>
     <meta charset="UTF-8">
-    <title>Spectre sign up form</title>
+    <title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,600' rel='stylesheet' type='text/css'>
 
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300'>
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,700,300'>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
     <style type="text/css">
         body {
-            font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
-            background: #e9e9e9;
-        }
-
-        a,
-        [type="submit"] {
-            transition: all .25s ease-in;
-        }
-
-        .signup__container {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            left: 0;
-            margin-right: auto;
-            margin-left: auto;
-            -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+            margin: 0;
+            height: 100%;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50rem;
-            height: 30rem;
-            border-radius: 0.1875rem;
-            box-shadow: 0px 0.1875rem 0.4375rem rgba(0, 0, 0, 0.25);
+            width: 100% !important;
+            box-sizing: border-box;
+            font-family: "Roboto", sans-serif;
         }
 
-        .signup__overlay {
+
+        .backLeft {
+            position: absolute;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #03A9F4;
+        }
+
+        #back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: -999;
+        }
+
+        .canvas-back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.76);
+            z-index: 10;
         }
 
-        .container__child {
+        #slideBox {
             width: 50%;
+            max-height: 100%;
             height: 100%;
-            color: #fff;
+            overflow: hidden;
+            margin-left: 50%;
+            position: absolute;
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
         }
 
-        .signup__thumbnail {
+        .topLayer {
+            width: 200%;
+            height: 100%;
             position: relative;
-            padding: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            background: url(https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-714946.jpg);
-            background-repeat: no-repeat;
-            background-position: top center;
-            background-size: cover;
-        }
-
-        .thumbnail__logo,
-        .thumbnail__content,
-        .thumbnail__links {
-            position: relative;
-            z-index: 2;
-        }
-
-        .thumbnail__logo {
-            align-self: flex-start;
-        }
-
-        .logo__shape {
-            fill: #fff;
-        }
-
-        .logo__text {
-            display: inline-block;
-            font-size: .8rem;
-            font-weight: 700;
-            vertical-align: bottom;
-        }
-
-        .thumbnail__content {
-            align-self: center;
-        }
-
-        h1,
-        h2 {
-            font-weight: 300;
-            color: white;
-        }
-
-        .heading--primary {
-            font-size: 1.999rem;
-        }
-
-        .heading--secondary {
-            font-size: 1.414rem;
-        }
-
-        .thumbnail__links {
-            align-self: flex-end;
-            width: 100%;
-        }
-
-        .thumbnail__links a {
-            font-size: 1rem;
-            color: #fff;
-        }
-        .thumbnail__links a:focus, .thumbnail__links a:hover {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .signup__form {
-            padding: 2.5rem;
-            background: #fafafa;
+            left: 0;
+            left: -100%;
         }
 
         label {
-            font-size: .85rem;
+            font-size: 0.8em;
             text-transform: uppercase;
-            color: #ccc;
         }
 
-        .form-control {
+        input {
             background-color: transparent;
-            border-top: 0;
-            border-right: 0;
-            border-left: 0;
-            border-radius: 0;
-        }
-        .form-control:focus {
-            border-color: #111;
+            border: 0;
+            outline: 0;
+            font-size: 1em;
+            padding: 8px 1px;
+            margin-top: 0.1em;
         }
 
-        [type="text"] {
-            color: #111;
+
+
+        .right {
+            width: 50%;
+            height: 100%;
+            overflow: scroll;
+            background: #f9f9f9;
+            right: 0;
+            position: absolute;
+        }
+        .right label {
+            color: #212121;
+        }
+        .right input {
+            border-bottom: 1px solid #212121;
+        }
+        .right input:focus, .right input:active {
+            border-color: #03A9F4;
+        }
+        .right input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px #f9f9f9 inset;
+            -webkit-text-fill-color: #212121;
         }
 
-        [type="password"] {
-            color: #111;
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100%;
+            width: 80%;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .btn--form {
-            padding: .5rem 2.5rem;
-            font-size: .95rem;
+        .content h2 {
+            font-weight: 300;
+            font-size: 2.6em;
+            margin: 0.2em 0 0.1em;
+        }
+
+
+        .right .content h2 {
+            color: #03A9F4;
+        }
+
+        .form-element {
+            margin: 1.6em 0;
+        }
+        .form-element.form-submit {
+            margin: 1.6em 0 0;
+        }
+
+        .form-stack {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkbox {
+            -webkit-appearance: none;
+            outline: none;
+            background-color: #e3e3e3;
+            border: 1px solid #e3e3e3;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 12px;
+            border-radius: 4px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .checkbox:focus, .checkbox:checked:focus,
+        .checkbox:active, .checkbox:checked:active {
+            border-color: #03A9F4;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox:checked {
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox:checked:after {
+            outline: none;
+            content: '\2713';
+            color: #03A9F4;
+            font-size: 1.4em;
+            font-weight: 900;
+            position: absolute;
+            top: -4px;
+            left: 4px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+        }
+        .form-checkbox label {
+            margin: 0 6px 0;
+            font-size: 0.72em;
+        }
+
+        button {
+            padding: 0.8em 1.2em;
+            margin: 0 10px 0 0;
+            width: auto;
             font-weight: 600;
             text-transform: uppercase;
+            font-size: 1em;
             color: #fff;
-            background: #111;
-            border-radius: 2.1875rem;
-        }
-        .btn--form:focus, .btn--form:hover {
-            background: #323232;
+            line-height: 1em;
+            letter-spacing: 0.6px;
+            border-radius: 3px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+            border: 0;
+            outline: 0;
+            transition: all 0.25s;
         }
 
-        .signup__link {
-            font-size: .8rem;
-            font-weight: 600;
-            text-decoration: underline;
-            color: #999;
+        button.login {
+            background: #03A9F4;
         }
-        .signup__link:focus, .signup__link:hover {
-            color: #787878;
+        button.off {
+            background: none;
+            box-shadow: none;
+            margin: 0;
+        }
+        .black{
+            text-decoration: none;
+            color: #212121;
+        }
+
+        button.off.login {
+            color: #03A9F4;
+        }
+
+        button:focus, button:active, button:hover {
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:focus.login, button:active.login, button:hover.login {
+            background: #03A9F4;
+        }
+        button:focus.off, button:active.off, button:hover.off {
+            box-shadow: none;
+        }
+
+        button:focus.off.login, button:active.off.login, button:hover.off.login {
+            color: #03A9F4;
+            background: #e3e3e3;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #slideBox {
+                width: 80%;
+                margin-left: 20%;
+            }
+
+            .signup-info, .login-info {
+                display: none;
+            }
         }
 
     </style>
+
 
 </head>
 
 <body>
 
-<div class="signup__container">
-    <div class="container__child signup__thumbnail">
-        <div class="thumbnail__logo">
-            <svg class="logo__shape" width="25px" viewBox="0 0 634 479" xmlns="http://www.w3.org/2000/svg">
-            </svg>
-            <h1 class="logo__text">Sign Up</h1>
-        </div>
-        <div class="thumbnail__content text-center">
-            <h1 class="heading--primary">欢迎.</h1>
-            <h2 class="heading--secondary">Ni Jue De Wo Zai Shuo Shen Me?</h2>
-        </div>
-        <div class="thumbnail__links">
-        </div>
-        <div class="signup__overlay"></div>
+<div id="back">
+    <canvas id="canvas" class="canvas-back"></canvas>
+    <div class="backRight">
     </div>
-    <div class="container__child signup__form">
-        <form action="#">
-            <div class="form-group">
-                <label for="username">username</label>
-                <input class="form-control" type="text" name="username" id="username" placeholder="username" required />
-            </div>
-            <div class="form-group">
-                <label for="email">email</label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="username@domain.com" required />
-            </div>
-            <div class="form-group">
-                <label for="password">password</label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="请输入6-16位密码" required />
-            </div>
-            <div class="form-group">
-                <label for="passwordRepeat">confirm password</label>
-                <input class="form-control" type="password" name="passwordRepeat" id="passwordRepeat" placeholder="确认已输入的密码"
-                       required />
-            </div>
-            <div class="m-t-lg">
-                <ul class="list-inline">
-                    <li>
-                        <input class="btn btn--form" type="submit" value="注册" />
-                    </li>
-                    <li>
-                        <a class="signup__link" href="login">已经注册？请登录</a>
-                    </li>
-                </ul>
-            </div>
-        </form>
+    <div class="backLeft">
     </div>
 </div>
+
+<div id="slideBox">
+    <div class="topLayer">
+        <div class="right">
+            <div class="content">
+                <h2>Sign Up</h2>
+                <form id="form-login" method="post">
+                    <div class="form-element form-stack">
+                        <label for="username-login" class="form-label">Username</label>
+                        <input id="username-login" type="text" name="username">
+                    </div>
+                    <div class="form-element form-stack">
+                        <label for="password-login" class="form-label">Password</label>
+                        <input id="password-login" type="password" name="password">
+                    </div>
+                    <div class="form-element form-stack">
+                        <label for="password-login" class="form-label">Confirm Password</label>
+                        <input id="password-login" type="password" name="passwords">
+                    </div>
+                    <div class="form-element form-stack">
+                        <label for="username-login" class="form-label">E-Mail</label>
+                        <input id="username-login" type="text" name="email">
+                    </div>
+
+                    <div class="form-element form-submit">
+                        <button id="logIn" class="login" type="submit" name="signup">Sign Up</button>
+                        <button id="goRight" class="login off" name="login"><a class="black" href="login">Log In</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js'></script>
+
+
+
+<script type="text/javascript">
+    /* ====================== *
+ *  Toggle Between        *
+ *  Sign Up / Login       *
+ * ====================== */
+    $(document).ready(function(){
+        $('#goRight').on('click', function(){
+            $('#slideBox').animate({
+                'marginLeft' : '0'
+            });
+            $('.topLayer').animate({
+                'marginLeft' : '100%'
+            });
+        });
+        $('#goLeft').on('click', function(){
+            if (window.innerWidth > 769){
+                $('#slideBox').animate({
+                    'marginLeft' : '50%'
+                });
+            }
+            else {
+                $('#slideBox').animate({
+                    'marginLeft' : '20%'
+                });
+            }
+            $('.topLayer').animate({
+                'marginLeft': '0'
+            });
+        });
+    });
+
+    /* ====================== *
+     *  Initiate Canvas       *
+     * ====================== */
+    paper.install(window);
+    paper.setup(document.getElementById("canvas"));
+
+    // Paper JS Variables
+    var canvasWidth,
+        canvasHeight,
+        canvasMiddleX,
+        canvasMiddleY;
+
+    var shapeGroup = new Group();
+
+    var positionArray = [];
+
+    function getCanvasBounds() {
+        // Get current canvas size
+        canvasWidth = view.size.width;
+        canvasHeight = view.size.height;
+        canvasMiddleX = canvasWidth / 2;
+        canvasMiddleY = canvasHeight / 2;
+        // Set path position
+        var position1 = {
+            x: (canvasMiddleX / 2) + 100,
+            y: 100,
+        };
+
+        var position2 = {
+            x: 200,
+            y: canvasMiddleY,
+        };
+
+        var position3 = {
+            x: (canvasMiddleX - 50) + (canvasMiddleX / 2),
+            y: 150,
+        };
+
+        var position4 = {
+            x: 0,
+            y: canvasMiddleY + 100,
+        };
+
+        var position5 = {
+            x: canvasWidth - 130,
+            y: canvasHeight - 75,
+        };
+
+        var position6 = {
+            x: canvasMiddleX + 80,
+            y: canvasHeight - 50,
+        };
+
+        var position7 = {
+            x: canvasWidth + 60,
+            y: canvasMiddleY - 50,
+        };
+
+        var position8 = {
+            x: canvasMiddleX + 100,
+            y: canvasMiddleY + 100,
+        };
+
+        positionArray = [position3, position2, position5, position4, position1, position6, position7, position8];
+    };
+
+
+    /* ====================== *
+     * Create Shapes          *
+     * ====================== */
+    function initializeShapes() {
+        // Get Canvas Bounds
+        getCanvasBounds();
+
+        var shapePathData = [
+            'M231,352l445-156L600,0L452,54L331,3L0,48L231,352',
+            'M0,0l64,219L29,343l535,30L478,37l-133,4L0,0z',
+            'M0,65l16,138l96,107l270-2L470,0L337,4L0,65z',
+            'M333,0L0,94l64,219L29,437l570-151l-196-42L333,0',
+            'M331.9,3.6l-331,45l231,304l445-156l-76-196l-148,54L331.9,3.6z',
+            'M389,352l92-113l195-43l0,0l0,0L445,48l-80,1L122.7,0L0,275.2L162,297L389,352',
+            'M 50 100 L 300 150 L 550 50 L 750 300 L 500 250 L 300 450 L 50 100',
+            'M 700 350 L 500 350 L 700 500 L 400 400 L 200 450 L 250 350 L 100 300 L 150 50 L 350 100 L 250 150 L 450 150 L 400 50 L 550 150 L 350 250 L 650 150 L 650 50 L 700 150 L 600 250 L 750 250 L 650 300 L 700 350 '
+        ];
+
+        for (var i = 0; i <= shapePathData.length; i++) {
+            // Create shape
+            var headerShape = new Path({
+                strokeColor: 'rgba(255, 255, 255, 0.5)',
+                strokeWidth: 2,
+                parent: shapeGroup,
+            });
+            // Set path data
+            headerShape.pathData = shapePathData[i];
+            headerShape.scale(2);
+            // Set path position
+            headerShape.position = positionArray[i];
+        }
+    };
+
+    initializeShapes();
+
+    /* ====================== *
+     * Animation              *
+     * ====================== */
+    view.onFrame = function paperOnFrame(event) {
+        if (event.count % 4 === 0) {
+            // Slows down frame rate
+            for (var i = 0; i < shapeGroup.children.length; i++) {
+                if (i % 2 === 0) {
+                    shapeGroup.children[i].rotate(-0.1);
+                } else {
+                    shapeGroup.children[i].rotate(0.1);
+                }
+            }
+        }
+    };
+
+    view.onResize = function paperOnResize() {
+        getCanvasBounds();
+
+        for (var i = 0; i < shapeGroup.children.length; i++) {
+            shapeGroup.children[i].position = positionArray[i];
+        }
+
+        if (canvasWidth < 700) {
+            shapeGroup.children[3].opacity = 0;
+            shapeGroup.children[2].opacity = 0;
+            shapeGroup.children[5].opacity = 0;
+        } else {
+            shapeGroup.children[3].opacity = 1;
+            shapeGroup.children[2].opacity = 1;
+            shapeGroup.children[5].opacity = 1;
+        }
+    };
+</script>
+
 
 
 
