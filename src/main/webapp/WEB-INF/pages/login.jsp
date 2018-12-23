@@ -204,6 +204,7 @@
             background: #673AB7;
         }
         button.off {
+            padding: 0;
             background: none;
             box-shadow: none;
             margin: 0;
@@ -243,6 +244,8 @@
         .black{
             text-decoration: none;
             color: #212121;
+            display: block;
+            height: 100%;
         }
     </style>
 
@@ -282,12 +285,41 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="js/paper-full.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 
-
+<%--
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js'></script>
+--%>
 
 <script type="text/javascript">
+
+
+
+    $(function () {
+        $("#logIn").click(function () {
+            var formlogin = $("#form-login").serialize();
+            $.ajax({
+                url:"doLogin",
+                type:"post",
+                data:formlogin,
+                success:function (data) {
+                    if (data=="1"){
+                        window.location.href="http://localhost:8080/webManager_war_exploded/list"
+                    }
+                    if (data=="3"){
+                        alert("请检查密码");
+                        window.location.href="http://localhost:8080/webManager_war_exploded/login"
+                    }
+                    if (data=="2"){
+                        alert("用户名不存在")
+                        window.location.href="http://localhost:8080/webManager_war_exploded/login"
+                    }
+                }
+            })
+        })
+    });
     /* ====================== *
 *  Toggle Between        *
 *  Sign Up / Login       *

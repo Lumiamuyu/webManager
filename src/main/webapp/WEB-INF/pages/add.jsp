@@ -227,97 +227,28 @@
                 pointer-events: none;
             }
         }
-        a{
-            text-decoration: none;
-            color: white;
+
+        input {
+            border:1px solid #ccc;
+            width:200px;
+            padding:10px;
+            margin:5px 15px;
+            border-radius:5px;
+        }
+        .send {
+            width:220px;
         }
 
-        table {
-            border: 1px solid #ccc;
-            border-collapse: collapse;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            table-layout: fixed;
-        }
-
-        table caption {
-            font-size: 1.5em;
-            margin: .5em 0 .75em;
+        h1{
+            margin-left: 15px;
             color: #155fb4;
         }
 
-        table tr {
-            background-color: #236eb4;
-            border: 1px solid #ddd;
-            padding: .35em;
+        form{
+            color: #155fb4;
+            padding-left: 15px;
         }
 
-        table th,
-        table td {
-            padding: .625em;
-            text-align: center;
-        }
-
-        table th {
-            font-size: .85em;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-
-        @media screen and (max-width: 600px) {
-            table {
-                border: 0;
-            }
-
-            table caption {
-                font-size: 1.3em;
-            }
-
-            table thead {
-                border: none;
-                clip: rect(0 0 0 0);
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-                width: 1px;
-            }
-
-            table tr {
-                border-bottom: 3px solid #ddd;
-                display: block;
-                margin-bottom: .625em;
-            }
-
-            table td {
-                border-bottom: 1px solid #ddd;
-                display: block;
-                font-size: .8em;
-                text-align: right;
-            }
-
-            table td::before {
-                /*
-                * aria-label has no advantage, it won't be read inside a table
-                content: attr(aria-label);
-                */
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            table td:last-child {
-                border-bottom: 0;
-            }
-        }
-
-        #sear{
-            position: absolute;
-            float: right;
-        }
 
     </style>
 
@@ -334,8 +265,8 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
-        <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
+        <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
+        <li tabindex="0" class="icon-customers" ><span>增加</span></li>
         <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
         <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
         <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
@@ -343,72 +274,44 @@
 </nav>
 
 <main>
-
     <div>
-        <table>
-            <caption>Product LIST</caption>
-            <form id="sear" method="post">
-                <input type="text" name="text" value="${text}">
-                <input type="submit" value="搜索">
-            </form>
-            <thead>
-            <tr>
-                <th scope="col">编号</th>
-                <th scope="col">名称</th>
-                <th scope="col">价格</th>
-                <th scope="col">图片</th>
-                <th scope="col">描述</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${lists}" var="pro">
-                <tr>
-                    <td>${pro.productId}</td>
-                    <td>${pro.productName}</td>
-                    <td>${pro.price}</td>
-                    <td><img src="${pro.url}" height="50px" alt="pic"></td>
-                    <td>${pro.productDes}</td>
-                </tr>
-            </c:forEach>
-<%--            <tr>
-                <td data-label="Account">Visa - 3412</td>
-                <td data-label="Due Date">04/01/2016</td>
-                <td data-label="Amount">$1,190</td>
-                <td data-label="Period">03/01/2016 - 03/31/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Visa - 6076</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$2,443</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Corporate AMEX</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$1,181</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Acount">Visa - 3412</td>
-                <td data-label="Due Date">02/01/2016</td>
-                <td data-label="Amount">$842</td>
-                <td data-label="Period">01/01/2016 - 01/31/2016</td>
-            </tr>--%>
-            </tbody>
-        </table>
+        <h1>添加</h1>
     </div>
 
-<%--    <div class="helper">
+    <div>
+        <form action="doAdd" method="post" enctype="multipart/form-data">
+            商品名称<input class='required' name="name" placeholder='商品名称' type='text'>
 
-&lt;%&ndash;        RESIZE THE WINDOW
-        <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
+        <div id='br'>
+            商品价格<input class='required' name="price" placeholder='商品价格' type='text'>
+        </div>
+        <div id='br'>
+            商品图片<input name="url" placeholder='商品图片' type='file' onchange="imgChange(this)"><img id="img" width="150">
+        </div>
+        <div id='br'>
+            商品描述<input class='required' name="des" placeholder='商品描述' type='text'>
+        </div>
 
-    </div>--%>
+
+<%--        <div id='br'>
+            <input placeholder='Phone' type='text'>
+        </div>--%>
+        <div id='br'>
+            <input class='send' type='submit' value='确认添加'>
+        </div>
+        </form>
+
+    </div>
+
+    <%--    <div class="helper">
+
+    &lt;%&ndash;        RESIZE THE WINDOW
+            <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
+
+        </div>--%>
 </main>
 
-
-
-<script  src="js/index.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     function search(){
         window.location.href="list";
@@ -425,6 +328,42 @@
     function exit(){
         window.location.href="exit";
     }
+
+    jQuery('document').ready(function($) {
+        $('.required').keyup(function() {
+
+            var empty = false;
+            $('.required').each(function() {
+                if ($(this).val() === '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('.send').prop('disabled', true);
+                $('.send').css('background-color', '#ccc');
+            } else {
+                $('.send').prop('disabled', false);
+                $('.send').css({'background-color': '#21759b','color':'#ffffff'});
+            }
+        });
+    });
+
+    function imgChange(obj){
+        var les = (obj.files[0].name).substr((obj.files[0].name).indexOf(".")+1);
+        if (les=="jpg"||les=="png"||les=="jpeg"||les=="gif"){
+            var reader = new FileReader();
+            reader.onload=function (e) {
+                var img = document.getElementById("img");
+                img.src=e.target.result;
+            }
+            reader.readAsDataURL(obj.files[0]);
+        }else {
+            img.src="";
+        }
+    }
+
+
 </script>
 
 
@@ -433,3 +372,4 @@
 </body>
 
 </html>
+

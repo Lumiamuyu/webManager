@@ -314,11 +314,6 @@
             }
         }
 
-        #sear{
-            position: absolute;
-            float: right;
-        }
-
     </style>
 
 
@@ -334,9 +329,9 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
-        <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
+        <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
         <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
-        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
+        <li tabindex="0" class="icon-users"><span>修改</span></li>
         <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
         <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
     </ul>
@@ -346,7 +341,7 @@
 
     <div>
         <table>
-            <caption>Product LIST</caption>
+            <caption>修改</caption>
             <form id="sear" method="post">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
@@ -358,6 +353,7 @@
                 <th scope="col">价格</th>
                 <th scope="col">图片</th>
                 <th scope="col">描述</th>
+                <th scope="col">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -368,42 +364,43 @@
                     <td>${pro.price}</td>
                     <td><img src="${pro.url}" height="50px" alt="pic"></td>
                     <td>${pro.productDes}</td>
+                    <td><a href="update?productId=${pro.productId}"><input type="button" value="修改"></a></td>
                 </tr>
             </c:forEach>
-<%--            <tr>
-                <td data-label="Account">Visa - 3412</td>
-                <td data-label="Due Date">04/01/2016</td>
-                <td data-label="Amount">$1,190</td>
-                <td data-label="Period">03/01/2016 - 03/31/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Visa - 6076</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$2,443</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Corporate AMEX</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$1,181</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Acount">Visa - 3412</td>
-                <td data-label="Due Date">02/01/2016</td>
-                <td data-label="Amount">$842</td>
-                <td data-label="Period">01/01/2016 - 01/31/2016</td>
-            </tr>--%>
+            <%--            <tr>
+                            <td data-label="Account">Visa - 3412</td>
+                            <td data-label="Due Date">04/01/2016</td>
+                            <td data-label="Amount">$1,190</td>
+                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" data-label="Account">Visa - 6076</td>
+                            <td data-label="Due Date">03/01/2016</td>
+                            <td data-label="Amount">$2,443</td>
+                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" data-label="Account">Corporate AMEX</td>
+                            <td data-label="Due Date">03/01/2016</td>
+                            <td data-label="Amount">$1,181</td>
+                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
+                        </tr>
+                        <tr>
+                            <td scope="row" data-label="Acount">Visa - 3412</td>
+                            <td data-label="Due Date">02/01/2016</td>
+                            <td data-label="Amount">$842</td>
+                            <td data-label="Period">01/01/2016 - 01/31/2016</td>
+                        </tr>--%>
             </tbody>
         </table>
     </div>
 
-<%--    <div class="helper">
+    <%--    <div class="helper">
 
-&lt;%&ndash;        RESIZE THE WINDOW
-        <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
+    &lt;%&ndash;        RESIZE THE WINDOW
+            <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
 
-    </div>--%>
+        </div>--%>
 </main>
 
 

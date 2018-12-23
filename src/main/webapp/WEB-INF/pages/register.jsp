@@ -71,6 +71,7 @@
 
         label {
             font-size: 0.8em;
+            width: 200px;
             text-transform: uppercase;
         }
 
@@ -183,6 +184,12 @@
             font-size: 0.72em;
         }
 
+        span{
+            color: #212121;
+            display: inline-block;
+            font-size: 8px;
+        }
+
         button {
             padding: 0.8em 1.2em;
             margin: 0 10px 0 0;
@@ -204,6 +211,7 @@
             background: #03A9F4;
         }
         button.off {
+            padding: 0;
             background: none;
             box-shadow: none;
             margin: 0;
@@ -264,26 +272,26 @@
         <div class="right">
             <div class="content">
                 <h2>Sign Up</h2>
-                <form id="form-login" method="post">
+                <form action="doRegister" id="form-login" method="post">
                     <div class="form-element form-stack">
-                        <label for="username-login" class="form-label">Username</label>
-                        <input id="username-login" type="text" name="username">
+                        <label for="username" class="form-label">Username</label><span id="message"></span>
+                        <input id="username" class="blur" type="text" name="username">
                     </div>
                     <div class="form-element form-stack">
-                        <label for="password-login" class="form-label">Password</label>
-                        <input id="password-login" type="password" name="password">
+                        <label for="password" class="form-label">Password</label><span id="pwn"></span>
+                        <input id="password" class="blur" type="password" name="password">
                     </div>
                     <div class="form-element form-stack">
-                        <label for="password-login" class="form-label">Confirm Password</label>
-                        <input id="password-login" type="password" name="passwords">
+                        <label for="passwords" class="form-label">Confirm Password</label>
+                        <input id="passwords" class="blur" type="password" name="passwords">
                     </div>
                     <div class="form-element form-stack">
-                        <label for="username-login" class="form-label">E-Mail</label>
-                        <input id="username-login" type="text" name="email">
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input id="email" class="blur" type="text" name="email">
                     </div>
 
                     <div class="form-element form-submit">
-                        <button id="logIn" class="login" type="submit" name="signup">Sign Up</button>
+                        <button id="logIn" class="login" type="submit" name="signup" disabled="disabled">Sign Up</button>
                         <button id="goRight" class="login off" name="login"><a class="black" href="login">Log In</a></button>
                     </div>
                 </form>
@@ -291,10 +299,12 @@
         </div>
     </div>
 </div>
-
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+<script type="text/javascript" src="js/paper-full.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<%--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>--%>
+<%--
 <script src='https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js'></script>
+--%>
 
 
 
@@ -303,6 +313,67 @@
  *  Toggle Between        *
  *  Sign Up / Login       *
  * ====================== */
+    $(function () {
+        var username;
+        var password;
+        var passwords;
+        var email;
+        $(".blur").blur(function () {
+            username=$("#username").val();
+            password=$("#password").val();
+            passwords=$("#passwords").val();
+            email=$("#email").val();
+            $.ajax({
+                url:"doRegister",
+                type:"post",
+                data:{
+                    "username":username,
+                    "password":password,
+                    "passwords":passwords,
+                    "email":email
+                },
+                success:function (result) {
+                    if (result=="4"){
+                        $("#message").text("该用户名可以注册");
+                    }
+                    if (result=="43"){
+                        $("#message").text("该用户名可以注册");
+                        $("#pwn").text("✔");
+                        $("#logIn").attr("disabled",false);
+                    }
+                    if (result=="1"){
+                        $("#message").text("该用户名已存在，请登录或更换名称")
+                    }
+                    if (result =="42"){
+                        $("#message").text("该用户名可以注册");
+                        $("#pwn").text("密码不一致");
+                    }
+                }
+            })
+        });
+
+        $("#logIn").click(function () {
+            $.ajax({
+                url:"regIt",
+                type:"post",
+                data:{
+                    "username":username,
+                    "password":password,
+                    "passwords":passwords,
+                    "email":email
+                },
+                success:function (data) {
+                    if (data>0){
+                        alert("注册成功");
+                        window.location.href="http://localhost:8080/webManager_war_exploded/login";
+                    }
+                }
+            })
+        });
+
+    });
+
+
     $(document).ready(function(){
         $('#goRight').on('click', function(){
             $('#slideBox').animate({
