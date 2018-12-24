@@ -31,4 +31,9 @@ public class UserDaoImpl implements IUserDao {
             }
         },username);
     }
+
+    @Override
+    public int editPwd(String password) {
+        return 0;
+    }
 }

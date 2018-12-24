@@ -227,92 +227,28 @@
                 pointer-events: none;
             }
         }
-        a{
-            text-decoration: none;
-            color: white;
+
+        input {
+            border:1px solid #ccc;
+            width:200px;
+            padding:10px;
+            margin:5px 15px;
+            border-radius:5px;
+        }
+        .send {
+            width:220px;
         }
 
-        table {
-            border: 1px solid #ccc;
-            border-collapse: collapse;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            table-layout: fixed;
-        }
-
-        table caption {
-            font-size: 1.5em;
-            margin: .5em 0 .75em;
+        h1{
+            margin-left: 15px;
             color: #155fb4;
         }
 
-        table tr {
-            background-color: #236eb4;
-            border: 1px solid #ddd;
-            padding: .35em;
+        form{
+            color: #155fb4;
+            padding-left: 15px;
         }
 
-        table th,
-        table td {
-            padding: .625em;
-            text-align: center;
-        }
-
-        table th {
-            font-size: .85em;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-
-        @media screen and (max-width: 600px) {
-            table {
-                border: 0;
-            }
-
-            table caption {
-                font-size: 1.3em;
-            }
-
-            table thead {
-                border: none;
-                clip: rect(0 0 0 0);
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-                width: 1px;
-            }
-
-            table tr {
-                border-bottom: 3px solid #ddd;
-                display: block;
-                margin-bottom: .625em;
-            }
-
-            table td {
-                border-bottom: 1px solid #ddd;
-                display: block;
-                font-size: .8em;
-                text-align: right;
-            }
-
-            table td::before {
-                /*
-                * aria-label has no advantage, it won't be read inside a table
-                content: attr(aria-label);
-                */
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            table td:last-child {
-                border-bottom: 0;
-            }
-        }
 
     </style>
 
@@ -330,69 +266,37 @@
     </header>
     <ul>
         <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
-        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
+        <li tabindex="0" class="icon-customers"><span>增加</span></li>
+        <li tabindex="0" class="icon-users"><span>修改</span></li>
         <li tabindex="0" class="icon-settings"><span>删除</span></li>
-        <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
+        <li tabindex="0" class="icon-exit"><span>退出</span></li>
     </ul>
 </nav>
 
 <main>
+    <div>
+        <h1>修改密码</h1>
+    </div>
 
     <div>
-        <table>
-            <caption>产品删除</caption>
-            <form id="sear" method="post">
-                <input type="text" name="text" value="${text}">
-                <input type="submit" value="搜索">
-            </form>
-            <thead>
-            <tr>
-                <th scope="col">编号</th>
-                <th scope="col">名称</th>
-                <th scope="col">价格</th>
-                <th scope="col">图片</th>
-                <th scope="col">描述</th>
-                <th scope="col">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${lists}" var="pro">
-                <tr>
-                    <td>${pro.productId}</td>
-                    <td>${pro.productName}</td>
-                    <td>${pro.price}</td>
-                    <td><img src="${pro.url}" height="50px" alt="pic"></td>
-                    <td>${pro.productDes}</td>
-                    <td><a href="doDelete?productId=${pro.productId}"><input type="button" value="删除"></a></td>
-                </tr>
-            </c:forEach>
-            <%--            <tr>
-                            <td data-label="Account">Visa - 3412</td>
-                            <td data-label="Due Date">04/01/2016</td>
-                            <td data-label="Amount">$1,190</td>
-                            <td data-label="Period">03/01/2016 - 03/31/2016</td>
-                        </tr>
-                        <tr>
-                            <td scope="row" data-label="Account">Visa - 6076</td>
-                            <td data-label="Due Date">03/01/2016</td>
-                            <td data-label="Amount">$2,443</td>
-                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                        </tr>
-                        <tr>
-                            <td scope="row" data-label="Account">Corporate AMEX</td>
-                            <td data-label="Due Date">03/01/2016</td>
-                            <td data-label="Amount">$1,181</td>
-                            <td data-label="Period">02/01/2016 - 02/29/2016</td>
-                        </tr>
-                        <tr>
-                            <td scope="row" data-label="Acount">Visa - 3412</td>
-                            <td data-label="Due Date">02/01/2016</td>
-                            <td data-label="Amount">$842</td>
-                            <td data-label="Period">01/01/2016 - 01/31/2016</td>
-                        </tr>--%>
-            </tbody>
-        </table>
+        <form action="doUpdate">
+            输入原密码<input class='required' name="prepwd" placeholder='原密码' type='text' >
+
+            <div id='br'>
+                输入新密码<input class='required' name="newpwd" placeholder='新密码' type='text' >
+            </div>
+            <div id='br'>
+                请确认密码<input class='required' name="newpwds" placeholder='确认密码' type='text'>
+            </div>
+
+            <%--        <div id='br'>
+                        <input placeholder='Phone' type='text'>
+                    </div>--%>
+            <div id='br'>
+                <input class='send' type='submit' value='确认修改'>
+            </div>
+        </form>
+
     </div>
 
     <%--    <div class="helper">
@@ -403,25 +307,34 @@
         </div>--%>
 </main>
 
-
-
-<script  src="js/index.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     function search(){
         window.location.href="list";
     }
-    function add(){
-        window.location.href="add";
-    }
-    function update(){
-        window.location.href="updateView";
-    }
-    function del(){
-        window.location.href="delete";
-    }
-    function exit(){
-        window.location.href="exit";
-    }
+
+    jQuery('document').ready(function($) {
+        $('.required').keyup(function() {
+
+            var empty = false;
+            $('.required').each(function() {
+                if ($(this).val() === '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('.send').prop('disabled', true);
+                $('.send').css('background-color', '#ccc');
+            } else {
+                $('.send').prop('disabled', false);
+                $('.send').css({'background-color': '#21759b','color':'#ffffff'});
+            }
+        });
+    });
+
+
+
 </script>
 
 
@@ -430,3 +343,4 @@
 </body>
 
 </html>
+

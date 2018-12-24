@@ -346,7 +346,7 @@
 
     <div>
         <table>
-            <caption>Product LIST</caption>
+            <caption>商品查询</caption>
             <form id="sear" method="post">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">

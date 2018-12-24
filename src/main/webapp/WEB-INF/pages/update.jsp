@@ -341,7 +341,7 @@
 
     <div>
         <table>
-            <caption>修改</caption>
+            <caption>商品修改</caption>
             <form id="sear" method="post">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
