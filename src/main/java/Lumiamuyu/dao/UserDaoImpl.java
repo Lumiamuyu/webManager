@@ -33,7 +33,7 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public int editPwd(String password) {
-        return 0;
+    public int editPwd(User user) {
+        return JDBCUtil.executeUpdate("update user set password=? where id=?",user.getPassword(),user.getId());
     }
 }

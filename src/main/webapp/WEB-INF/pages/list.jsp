@@ -101,6 +101,12 @@
         .menu ul li.icon-exit {
             background-image: url("img/quit.png");
         }
+        .menu ul li.icon-edit {
+            background-image: url("img/key.png");
+        }
+        .menu ul li.icon-brand {
+            background-image: url("img/brand.png");
+        }
 
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
@@ -334,11 +340,14 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
+        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
         <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
         <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
         <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
+        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
         <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
+
     </ul>
 </nav>
 
@@ -358,6 +367,7 @@
                 <th scope="col">价格</th>
                 <th scope="col">图片</th>
                 <th scope="col">描述</th>
+                <th scope="col">库存</th>
             </tr>
             </thead>
             <tbody>
@@ -368,8 +378,10 @@
                     <td>${pro.price}</td>
                     <td><img src="${pro.url}" height="50px" alt="pic"></td>
                     <td>${pro.productDes}</td>
+                    <td>${pro.reverse}</td>
                 </tr>
             </c:forEach>
+
 <%--            <tr>
                 <td data-label="Account">Visa - 3412</td>
                 <td data-label="Due Date">04/01/2016</td>
@@ -410,6 +422,10 @@
 
 <script  src="js/index.js"></script>
 <script type="text/javascript">
+    function brand() {
+        window.location.href="brandlist";
+    }
+
     function search(){
         window.location.href="list";
     }
@@ -424,6 +440,10 @@
     }
     function exit(){
         window.location.href="exit";
+    }
+
+    function edit(){
+        window.location.href="profileedit";
     }
 </script>
 

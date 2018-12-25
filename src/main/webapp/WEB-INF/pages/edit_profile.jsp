@@ -101,6 +101,12 @@
         .menu ul li.icon-exit {
             background-image: url("img/quit.png");
         }
+        .menu ul li.icon-edit {
+            background-image: url("img/key.png");
+        }
+        .menu ul li.icon-brand {
+            background-image: url("img/brand.png");
+        }
 
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
@@ -265,11 +271,13 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
+        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers"><span>增加</span></li>
-        <li tabindex="0" class="icon-users"><span>修改</span></li>
-        <li tabindex="0" class="icon-settings"><span>删除</span></li>
-        <li tabindex="0" class="icon-exit"><span>退出</span></li>
+        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
+        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
+        <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
+        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
+        <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
     </ul>
 </nav>
 
@@ -279,21 +287,21 @@
     </div>
 
     <div>
-        <form action="doUpdate">
-            输入原密码<input class='required' name="prepwd" placeholder='原密码' type='text' >
+        <form action="doprofileedit">
+            输入原密码<input class='required' id="prepwd" name="prepwd" placeholder='原密码' type='text' ><span id="pre"></span>
 
             <div id='br'>
-                输入新密码<input class='required' name="newpwd" placeholder='新密码' type='text' >
+                输入新密码<input class='required' id="newpwd" name="newpwd" placeholder='新密码' type='text' >
             </div>
             <div id='br'>
-                请确认密码<input class='required' name="newpwds" placeholder='确认密码' type='text'>
+                请确认密码<input class='required' id="newpwds" name="newpwds" placeholder='确认密码' type='text'><span id="new"></span>
             </div>
 
             <%--        <div id='br'>
                         <input placeholder='Phone' type='text'>
                     </div>--%>
             <div id='br'>
-                <input class='send' type='submit' value='确认修改'>
+                <input class='sends' type='submit' value='确认修改'>
             </div>
         </form>
 
@@ -309,9 +317,86 @@
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+    function edit(){
+        window.location.href="profileedit";
+    }
     function search(){
         window.location.href="list";
     }
+    function add(){
+        window.location.href="add";
+    }
+    function update(){
+        window.location.href="updateView";
+    }
+    function del(){
+        window.location.href="delete";
+    }
+    function exit(){
+        window.location.href="exit";
+    }
+    function brand() {
+        window.location.href="brandlist";
+    }
+
+
+    $(function () {
+        var prepwd;
+        var newpwd;
+        var newpwds;
+
+        $(".required").blur(function () {
+            prepwd=$("#prepwd").val();
+            newpwd=$("#newpwd").val();
+            newpwds=$("#newpwds").val();
+            $.ajax({
+                url:"doprofileedit",
+                type:"post",
+                data:{
+                    "prepwd":prepwd,
+                    "newpwd":newpwd,
+                    "newpwds":newpwds
+                },
+                success:function (result) {
+                    if (result=="1"){
+                        $("#pre").text("密码匹配")
+                    }
+
+                    if (result=="13"){
+                        $("#new").text("✔");
+                        $("#pre").text("密码匹配");
+                    }
+
+                    if (result=="14"){
+                        $("#pre").text("密码匹配");
+                        $("#new").text("两次输入密码不一致")
+                    }
+                    if (result=="2"){
+                        $("#pre").text("原密码错误")
+                    }
+                }
+            })
+        });
+
+        $(".sends").click(function () {
+            $.ajax({
+                url:"editIt",
+                type:"post",
+                data:{
+                    "newpwd":newpwd
+                },
+                success:function (data) {
+                    if (data>0){
+                        alert("密码修改成功");
+                        window.location.href="http://localhost:8080/webManager_war_exploded/login";
+                    }
+                }
+            })
+        })
+
+
+    });
+
 
     jQuery('document').ready(function($) {
         $('.required').keyup(function() {

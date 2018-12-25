@@ -15,4 +15,9 @@ public class UserServiceImpl implements IUserService {
     public User getUser(String username) {
         return idao.getUser(username);
     }
+
+    @Override
+    public int editPwd(User user) {
+        return idao.editPwd(user);
+    }
 }

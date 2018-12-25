@@ -101,7 +101,13 @@
         .menu ul li.icon-exit {
             background-image: url("img/quit.png");
         }
+        .menu ul li.icon-edit {
+            background-image: url("img/key.png");
+        }
 
+        .menu ul li.icon-brand {
+            background-image: url("img/brand.png");
+        }
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
@@ -265,10 +271,12 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
+        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
         <li tabindex="0" class="icon-customers" ><span>增加</span></li>
         <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
         <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
+        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
         <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
     </ul>
 </nav>
@@ -291,6 +299,9 @@
         <div id='br'>
             商品描述<input class='required' name="des" placeholder='商品描述' type='text'>
         </div>
+            <div id='br'>
+                商品库存<input class='required' name="reverse" placeholder='商品库存' type='text'>
+            </div>
 
 
 <%--        <div id='br'>
@@ -313,6 +324,9 @@
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+    function edit(){
+        window.location.href="profileedit";
+    }
     function search(){
         window.location.href="list";
     }
@@ -328,6 +342,10 @@
     function exit(){
         window.location.href="exit";
     }
+    function brand() {
+        window.location.href="brandlist";
+    }
+
 
     jQuery('document').ready(function($) {
         $('.required').keyup(function() {

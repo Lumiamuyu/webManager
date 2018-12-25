@@ -39,12 +39,14 @@ public class DoAddServlet extends HttpServlet {
         String name = req.getParameter("name");
         double price =Double.parseDouble(req.getParameter("price"));
         String des = req.getParameter("des");
+        int rev =Integer.parseInt(req.getParameter("reverse")) ;
         /*String url1 = req.getParameter("url");*/
         Product p = new Product();
         p.setProductName(name);
         p.setPrice(price);
         p.setUrl(url);
         p.setProductDes(des);
+        p.setReverse(rev);
         service.add(p);
         resp.sendRedirect("list");
     }

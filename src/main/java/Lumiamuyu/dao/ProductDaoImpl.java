@@ -21,6 +21,8 @@ public class ProductDaoImpl implements IProductDao {
                     p.setProductDes(resultSet.getString("product_des"));
                     p.setUrl(resultSet.getString("url"));
                     p.setPrice(resultSet.getDouble("price"));
+                    p.setBrandId(resultSet.getInt("brand_id"));
+                    p.setReverse(resultSet.getInt("reverse"));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -31,7 +33,7 @@ public class ProductDaoImpl implements IProductDao {
 
     @Override
     public int add(Product product) {
-        return JDBCUtil.executeUpdate("insert into product(product_name,price,product_des,url) values(?,?,?,?)",product.getProductName(),product.getPrice(),product.getProductDes(),product.getUrl());
+        return JDBCUtil.executeUpdate("insert into product(product_name,price,product_des,url,reverse) values(?,?,?,?,?)",product.getProductName(),product.getPrice(),product.getProductDes(),product.getUrl(),product.getReverse());
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ProductDaoImpl implements IProductDao {
 
     @Override
     public int update(Product product) {
-        return JDBCUtil.executeUpdate("update product set product_name=?,product_des=?,url=?,price=? where product_id=?",product.getProductName(),product.getProductDes(),product.getUrl(),product.getPrice(),product.getProductId());
+        return JDBCUtil.executeUpdate("update product set product_name=?,product_des=?,url=?,price=?,reverse=? where product_id=?",product.getProductName(),product.getProductDes(),product.getUrl(),product.getPrice(),product.getReverse(),product.getProductId());
     }
 
     @Override
@@ -55,6 +57,7 @@ public class ProductDaoImpl implements IProductDao {
                     p.setProductDes(resultSet.getString("product_des"));
                     p.setUrl(resultSet.getString("url"));
                     p.setPrice(resultSet.getDouble("price"));
+                    p.setReverse(resultSet.getInt("reverse"));
                     p.setProductId(id);
                 } catch (SQLException e) {
                     e.printStackTrace();
