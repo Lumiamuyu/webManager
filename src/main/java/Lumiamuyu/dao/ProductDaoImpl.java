@@ -76,16 +76,69 @@ public class ProductDaoImpl implements IProductDao {
                 Product p = new Product();
                 try {
                     p.setProductName(resultSet.getString("product_name"));
-                    p.setProductDes(resultSet.getString("product_des"));
                     p.setUrl(resultSet.getString("url"));
+                    p.setProductDes(resultSet.getString("product_des"));
                     p.setPrice(resultSet.getDouble("price"));
                     p.setProductId(resultSet.getInt("product_id"));
+                    p.setReverse(resultSet.getInt("reverse"));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 return p;
             }
         }, text);
+    }
+
+    @Override
+    public List<Product> getLists(int pageNo, int pageSize) {
+        return JDBCUtil.executeQuery("select * from product limit ?,?", new RowMap<Product>() {
+            @Override
+            public Product RowMapping(ResultSet resultSet) {
+                Product p = new Product();
+                try {
+                    p.setProductId(resultSet.getInt("product_id"));
+                    p.setPrice(resultSet.getDouble("price"));
+                    p.setProductDes(resultSet.getString("product_des"));
+                    p.setProductName(resultSet.getString("product_name"));
+                    p.setUrl(resultSet.getString("url"));
+                    p.setReverse(resultSet.getInt("reverse"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return p;
+            }
+        }, (pageNo - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public List<Product> getLists(int pageNo, int pageSize, String text) {
+        return JDBCUtil.executeQuery("select * from product  where product_name like concat('%',?,'%') limit ?,?", new RowMap<Product>() {
+            @Override
+            public Product RowMapping(ResultSet resultSet) {
+                Product p = new Product();
+                try {
+                    p.setProductId(resultSet.getInt("product_id"));
+                    p.setUrl(resultSet.getString("url"));
+                    p.setPrice(resultSet.getDouble("price"));
+                    p.setProductDes(resultSet.getString("product_des"));
+                    p.setProductName(resultSet.getString("product_name"));
+                    p.setReverse(resultSet.getInt("reverse"));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return p;
+            }
+        }, text, (pageNo - 1) * pageSize, pageSize);
+    }
+
+    @Override
+    public int getCount() {
+        return JDBCUtil.executeCount("select count(*) from product",null);
+    }
+
+    @Override
+    public int getCount(String text) {
+        return JDBCUtil.executeCount("select count(*) from product where product_name like concat('%',?,'%') ",text);
     }
 
 }

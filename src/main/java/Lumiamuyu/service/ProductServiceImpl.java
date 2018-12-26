@@ -3,6 +3,7 @@ package Lumiamuyu.service;
 import Lumiamuyu.dao.IProductDao;
 import Lumiamuyu.dao.ProductDaoImpl;
 import Lumiamuyu.pojo.Product;
+import Lumiamuyu.pojo.ResultData;
 
 import java.util.List;
 
@@ -35,6 +36,24 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public List<Product> getResult(String text) {
-        return dao.getResult(text);
+        if(text==null){
+            return dao.getLists();
+        }else{
+            return dao.getResult(text);
+        }
+    }
+
+    @Override
+    public ResultData getLists(int pageNo, int pageSize, String text) {
+        ResultData data = new ResultData(pageNo,pageSize,dao.getCount(text));
+        data.setLists(dao.getLists(pageNo,pageSize,text));
+        return data;
+    }
+
+    @Override
+    public ResultData getLists(int pageNo, int pageSize) {
+        ResultData data = new ResultData(pageNo,pageSize,dao.getCount());
+        data.setLists(dao.getLists(pageNo,pageSize));
+        return data;
     }
 }

@@ -320,6 +320,34 @@
             }
         }
 
+
+        .bean{
+            position: absolute;
+            right: 0;
+            list-style: none;
+        }
+
+        .bean li{
+            float: left;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .bean li a{
+            text-decoration: none;
+            color: #155fb4;
+            display: block;
+        }
+
+        .bean .page{
+            width: 80px;
+            height: 30px;
+        }
+
+
     </style>
 
 
@@ -351,7 +379,7 @@
     <div>
         <table>
             <caption>商品修改</caption>
-            <form id="sear" method="post">
+            <form id="sear" method="get">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
             </form>
@@ -367,7 +395,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${lists}" var="pro">
+            <c:forEach items="${data.lists}" var="pro">
                 <tr>
                     <td>${pro.productId}</td>
                     <td>${pro.productName}</td>
@@ -404,6 +432,9 @@
                         </tr>--%>
             </tbody>
         </table>
+        <ul class="bean">
+            ${data.pageView}
+        </ul>
     </div>
 
     <%--    <div class="helper">

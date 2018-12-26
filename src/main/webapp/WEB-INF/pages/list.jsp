@@ -325,6 +325,33 @@
             float: right;
         }
 
+        .bean{
+            position: absolute;
+            right: 0;
+            list-style: none;
+        }
+
+        .bean li{
+            float: left;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .bean li a{
+            text-decoration: none;
+            color: #155fb4;
+            display: block;
+        }
+
+        .bean .page{
+            width: 80px;
+            height: 30px;
+        }
+
+
     </style>
 
 
@@ -356,7 +383,7 @@
     <div>
         <table>
             <caption>商品查询</caption>
-            <form id="sear" method="post">
+            <form id="sear" method="get">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
             </form>
@@ -371,7 +398,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${lists}" var="pro">
+            <c:forEach items="${data.lists}" var="pro">
                 <tr>
                     <td>${pro.productId}</td>
                     <td>${pro.productName}</td>
@@ -382,32 +409,12 @@
                 </tr>
             </c:forEach>
 
-<%--            <tr>
-                <td data-label="Account">Visa - 3412</td>
-                <td data-label="Due Date">04/01/2016</td>
-                <td data-label="Amount">$1,190</td>
-                <td data-label="Period">03/01/2016 - 03/31/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Visa - 6076</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$2,443</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Account">Corporate AMEX</td>
-                <td data-label="Due Date">03/01/2016</td>
-                <td data-label="Amount">$1,181</td>
-                <td data-label="Period">02/01/2016 - 02/29/2016</td>
-            </tr>
-            <tr>
-                <td scope="row" data-label="Acount">Visa - 3412</td>
-                <td data-label="Due Date">02/01/2016</td>
-                <td data-label="Amount">$842</td>
-                <td data-label="Period">01/01/2016 - 01/31/2016</td>
-            </tr>--%>
+
             </tbody>
         </table>
+        <ul class="bean">
+            ${data.pageView}
+        </ul>
     </div>
 
 <%--    <div class="helper">
