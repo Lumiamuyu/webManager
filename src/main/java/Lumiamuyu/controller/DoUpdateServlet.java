@@ -23,12 +23,14 @@ public class DoUpdateServlet extends HttpServlet {
         String des = req.getParameter("des");
         int rev =  Integer.parseInt(req.getParameter("reverse"));
         Product p = new Product();
+        int bid= Integer.parseInt(req.getParameter("brandId"));
         p.setPrice(price);
         p.setProductDes(des);
         p.setProductName(name);
         p.setUrl(url);
         p.setProductId(id);
         p.setReverse(rev);
+        p.setBrandId(bid);
         service.update(p);
         resp.sendRedirect("updateView");
     }

@@ -256,6 +256,17 @@
             padding-left: 15px;
         }
 
+        #brandname{
+            margin-top: 20px;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        select{
+            height: 30px;
+            width: 100px;
+        }
+
 
     </style>
 
@@ -308,6 +319,18 @@
             <%--        <div id='br'>
                         <input placeholder='Phone' type='text'>
     </div>--%>
+            <div id='br'>
+                商品品牌<select name="brandId" id="brandname" class='required'>
+                <c:forEach items="${brand}" var="b">
+                    <option value="${b.brandId}">${b.brandName}</option>
+                </c:forEach>
+
+            </select>
+
+                <%--              <input class='required' name="brandname" placeholder='商品品牌' type='text'>--%>
+            </div>
+
+
             <div id='br'>
                 <input class='send' type='submit' value='确认修改'>
             </div>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -22,10 +22,12 @@
             color: #fff;
             padding-left: 240px;
         }
+
         main {
             position: relative;
             height: 100vh;
         }
+
         main .helper {
             background: rgba(0, 0, 0, 0.2);
             color: #ffea92;
@@ -39,12 +41,14 @@
             font-size: 18px;
             font-weight: normal;
         }
+
         main .helper table {
             color: rgba(0, 0, 0, 0.5);
             font-size: 15px;
             font-family: "Microsoft YaHei UI";
             display: block;
         }
+
         .menu {
             background: #236eb4;
             height: 100vh;
@@ -55,11 +59,13 @@
             z-index: 5;
             outline: none;
         }
+
         .menu .avatar {
             background: rgba(0, 0, 0, 0.1);
             padding: 2em 0.5em;
             text-align: center;
         }
+
         .menu .avatar img {
             width: 100px;
             border-radius: 50%;
@@ -67,15 +73,18 @@
             border: 4px solid #ffea92;
             box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
         }
+
         .menu .avatar h2 {
             font-weight: normal;
             margin-bottom: 0;
         }
+
         .menu ul {
             list-style: none;
             padding: 0.5em 0;
             margin: 0;
         }
+
         .menu ul li {
             padding: 0.5em 1em 0.5em 3em;
             font-size: 0.95em;
@@ -86,21 +95,27 @@
             transition: all 0.15s linear;
             cursor: pointer;
         }
+
         .menu ul li.icon-dashboard {
             background-image: url("img/search.png");
         }
+
         .menu ul li.icon-customers {
             background-image: url("img/add.png");
         }
+
         .menu ul li.icon-users {
             background-image: url("img/update.png");
         }
+
         .menu ul li.icon-settings {
             background-image: url("img/delete.png");
         }
+
         .menu ul li.icon-exit {
             background-image: url("img/quit.png");
         }
+
         .menu ul li.icon-edit {
             background-image: url("img/key.png");
         }
@@ -109,26 +124,33 @@
         .menu ul li.icon-brand {
             background-image: url("img/brand.png");
         }
+
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
+
         .menu ul li:focus {
             outline: none;
         }
+
         @media screen and (max-width: 900px) and (min-width: 400px) {
             body {
                 padding-left: 90px;
             }
+
             .menu {
                 width: 90px;
             }
+
             .menu .avatar {
                 padding: 0.5em;
                 position: relative;
             }
+
             .menu .avatar img {
                 width: 60px;
             }
+
             .menu .avatar h2 {
                 opacity: 0;
                 position: absolute;
@@ -141,16 +163,19 @@
                 transform: translate3d(-20px, -50%, 0);
                 transition: all 0.15s ease-in-out;
             }
+
             .menu .avatar:hover h2 {
                 opacity: 1;
                 transform: translate3d(0px, -50%, 0);
             }
+
             .menu ul li {
                 height: 60px;
                 background-position: center center;
                 background-size: 30px auto;
                 position: relative;
             }
+
             .menu ul li span {
                 opacity: 0;
                 position: absolute;
@@ -163,15 +188,16 @@
                 transition: all 0.15s ease-in-out;
             }
 
-            .exit{
+            .exit {
                 text-decoration: none;
                 color: white;
             }
 
-            .menu ul li span a{
+            .menu ul li span a {
                 text-decoration: none;
                 color: white;
             }
+
             .menu ul li span:before {
                 content: '';
                 width: 0;
@@ -184,21 +210,25 @@
                 border-right: 5px solid rgba(0, 0, 0, 0.5);
                 transform: translateY(-50%);
             }
+
             .menu ul li:hover span {
                 opacity: 1;
                 transform: translate3d(0px, -50%, 0);
             }
         }
+
         @media screen and (max-width: 400px) {
             body {
                 padding-left: 0;
             }
+
             .menu {
                 width: 230px;
                 box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
                 transform: translate3d(-230px, 0, 0);
                 transition: all 0.3s ease-in-out;
             }
+
             .menu .smartphone-menu-trigger {
                 width: 40px;
                 height: 40px;
@@ -206,6 +236,7 @@
                 left: 100%;
                 background: #5bc995;
             }
+
             .menu .smartphone-menu-trigger:before,
             .menu .smartphone-menu-trigger:after {
                 content: '';
@@ -218,23 +249,28 @@
                 left: 50%;
                 transform: translate3d(-50%, -50%, 0);
             }
+
             .menu .smartphone-menu-trigger:after {
                 top: 55%;
                 transform: translate3d(-50%, -50%, 0);
             }
+
             .menu ul li {
                 padding: 1em 1em 1em 3em;
                 font-size: 1.2em;
             }
+
             .menu:focus {
                 transform: translate3d(0, 0, 0);
                 box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
             }
+
             .menu:focus .smartphone-menu-trigger {
                 pointer-events: none;
             }
         }
-        a{
+
+        a {
             text-decoration: none;
             color: white;
         }
@@ -322,13 +358,13 @@
         }
 
 
-        .bean{
+        .bean {
             position: absolute;
             right: 0;
             list-style: none;
         }
 
-        .bean li{
+        .bean li {
             float: left;
             height: 30px;
             width: 30px;
@@ -337,19 +373,18 @@
             text-decoration: none;
         }
 
-        .bean li a{
+        .bean li a {
             text-decoration: none;
             color: #155fb4;
             display: block;
         }
 
-        .bean .page{
+        .bean .page {
             width: 80px;
             height: 30px;
         }
 
     </style>
-
 
 
 </head>
@@ -359,7 +394,7 @@
 <nav class="menu" tabindex="0">
     <div class="smartphone-menu-trigger"></div>
     <header class="avatar">
-        <img src="img/head.png" />
+        <img src="img/head.png"/>
         <h2>${user.username}</h2>
     </header>
     <ul>
@@ -447,34 +482,37 @@
 </main>
 
 
-
-<script  src="js/index.js"></script>
+<script src="js/index.js"></script>
 <script type="text/javascript">
-    function edit(){
-        window.location.href="profileedit";
+    function edit() {
+        window.location.href = "profileedit";
     }
-    function search(){
-        window.location.href="list";
+
+    function search() {
+        window.location.href = "list";
     }
-    function add(){
-        window.location.href="add";
+
+    function add() {
+        window.location.href = "add";
     }
-    function update(){
-        window.location.href="updateView";
+
+    function update() {
+        window.location.href = "updateView";
     }
-    function del(){
-        window.location.href="delete";
+
+    function del() {
+        window.location.href = "delete";
     }
-    function exit(){
-        window.location.href="exit";
+
+    function exit() {
+        window.location.href = "exit";
     }
+
     function brand() {
-        window.location.href="brandlist";
+        window.location.href = "brandlist";
     }
 
 </script>
-
-
 
 
 </body>

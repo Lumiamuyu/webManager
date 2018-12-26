@@ -1,6 +1,13 @@
 package Lumiamuyu.pojo;
 
+import Lumiamuyu.utilTest.JDBCUtil;
+import Lumiamuyu.utilTest.RowMap;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ResultData {
     private List<?> lists;
@@ -11,6 +18,10 @@ public class ResultData {
     private int maxPage;
     private int maxCount;
     private String url;
+
+
+
+
     public void setUrl(String url,String params){
         this.url=url;
         StringBuilder strb= new StringBuilder();

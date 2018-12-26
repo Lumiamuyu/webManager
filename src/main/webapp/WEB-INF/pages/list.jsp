@@ -320,9 +320,13 @@
             }
         }
 
+
         #sear{
-            position: absolute;
-            float: right;
+            border:1px solid #ccc;
+            width:200px;
+            padding:10px;
+            margin:5px 15px;
+            border-radius:5px;
         }
 
         .bean{
@@ -395,10 +399,12 @@
                 <th scope="col">图片</th>
                 <th scope="col">描述</th>
                 <th scope="col">库存</th>
+               <%-- <th scope="col">品牌</th>--%>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${data.lists}" var="pro">
+              <%--  <c:forEach items="${pro.set}" var="b">--%>
                 <tr>
                     <td>${pro.productId}</td>
                     <td>${pro.productName}</td>
@@ -406,7 +412,9 @@
                     <td><img src="${pro.url}" height="50px" alt="pic"></td>
                     <td>${pro.productDes}</td>
                     <td>${pro.reverse}</td>
+                   <%-- <td>${b.brandName}</td>--%>
                 </tr>
+                <%--</c:forEach>--%>
             </c:forEach>
 
 

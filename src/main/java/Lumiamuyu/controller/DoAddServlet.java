@@ -1,6 +1,9 @@
 package Lumiamuyu.controller;
 
+import Lumiamuyu.pojo.Brand;
 import Lumiamuyu.pojo.Product;
+import Lumiamuyu.service.BrandServiceImpl;
+import Lumiamuyu.service.IBrandService;
 import Lumiamuyu.service.IProductService;
 import Lumiamuyu.service.ProductServiceImpl;
 
@@ -9,10 +12,13 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @MultipartConfig
 @WebServlet("/doAdd")
 public class DoAddServlet extends HttpServlet {
+    private IBrandService bservice = new BrandServiceImpl();
     private IProductService service = new ProductServiceImpl();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,7 +41,7 @@ public class DoAddServlet extends HttpServlet {
             r = inputStream.read(b,0,b.length);
         }
 
-
+        int id = Integer.parseInt(req.getParameter("brandId"));
         String name = req.getParameter("name");
         double price =Double.parseDouble(req.getParameter("price"));
         String des = req.getParameter("des");
@@ -47,6 +53,8 @@ public class DoAddServlet extends HttpServlet {
         p.setUrl(url);
         p.setProductDes(des);
         p.setReverse(rev);
+        p.setBrandId(id);
+        System.out.println(id);
         service.add(p);
         resp.sendRedirect("list");
     }

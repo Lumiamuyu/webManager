@@ -1,12 +1,10 @@
 package Lumiamuyu.controller;
 
+import Lumiamuyu.pojo.Brand;
 import Lumiamuyu.pojo.Product;
 import Lumiamuyu.pojo.ResultData;
 import Lumiamuyu.pojo.User;
-import Lumiamuyu.service.IProductService;
-import Lumiamuyu.service.IUserService;
-import Lumiamuyu.service.ProductServiceImpl;
-import Lumiamuyu.service.UserServiceImpl;
+import Lumiamuyu.service.*;
 import Lumiamuyu.utilTest.CookiesUtil;
 
 
@@ -22,10 +20,16 @@ public class ListServlet extends HttpServlet {
     private IProductService iservice = new ProductServiceImpl();
     private IUserService uservice = new UserServiceImpl();
     private IProductService pservice = new ProductServiceImpl();
+    private IBrandService bservice = new BrandServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int pageNo = req.getParameter("pageNo")==null?1:Integer.parseInt(req.getParameter("pageNo"));
         int pageSize=3;
+
+        List<Brand> brand = bservice.getLists();
+        System.out.println(brand);
+        req.setAttribute("brand",brand);
+
 
         List<Product> lists = iservice.getLists();
         req.setAttribute("lists", lists);
