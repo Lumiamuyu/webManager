@@ -22,4 +22,5 @@ public class BrandUpdateServlet extends HttpServlet {
         req.setAttribute("b",b);
         req.getRequestDispatcher("WEB-INF/pages/dobrandupdate.jsp").forward(req,resp);
     }
+
 }
