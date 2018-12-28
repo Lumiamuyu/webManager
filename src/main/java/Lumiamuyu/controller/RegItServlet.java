@@ -25,7 +25,7 @@ public class RegItServlet extends HttpServlet {
         user.setPassword(password);
         user.setEmail(email);
         int result = uService.insert(user);
-        System.out.println(result);
+      /*  System.out.println(result);*/
         if (result>0){
             resp.getWriter().write("1");
         }else {
