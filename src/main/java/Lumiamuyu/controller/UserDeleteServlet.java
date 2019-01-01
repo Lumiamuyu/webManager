@@ -9,23 +9,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-@WebServlet("/editIt")
-public class EditItServlet extends HttpServlet {
+import java.util.List;
+
+@WebServlet("/userDelete")
+public class UserDeleteServlet extends HttpServlet {
     private IUserService service = new UserServiceImpl();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String newpwd = req.getParameter("newpwd");
-        HttpSession session = req.getSession();
-        User u = (User) session.getAttribute("user");
-        u.setPassword(newpwd);
-        int result = service.editPwd(u);
-/*        System.out.println(result);*/
-        if (result>0){
-            resp.getWriter().write("1");
-        }else {
-            resp.getWriter().write("0");
-        }
+        List<User> list = service.getUserLists();
+        req.setAttribute("list",list);
+        resp.setCharacterEncoding("UTF-8");
+        resp.setHeader("content-type", "text/html;charset=UTF-8");
+        req.getRequestDispatcher("WEB-INF/pages/userdelete.jsp").forward(req,resp);
     }
 }

@@ -1,15 +1,11 @@
 package Lumiamuyu;
 
-import Lumiamuyu.dao.BrandDaoImpl;
-import Lumiamuyu.dao.IBrandDao;
-import Lumiamuyu.dao.IProductDao;
-import Lumiamuyu.dao.ProductDaoImpl;
+import Lumiamuyu.dao.*;
 import Lumiamuyu.pojo.Brand;
 import Lumiamuyu.pojo.Product;
-import Lumiamuyu.service.BrandServiceImpl;
-import Lumiamuyu.service.IBrandService;
-import Lumiamuyu.service.IProductService;
-import Lumiamuyu.service.ProductServiceImpl;
+import Lumiamuyu.pojo.Role;
+import Lumiamuyu.pojo.User;
+import Lumiamuyu.service.*;
 
 import java.util.List;
 
@@ -18,10 +14,13 @@ public class Test {
         IProductDao dao = new ProductDaoImpl();
         IProductService service = new ProductServiceImpl();
         IBrandService brandService = new BrandServiceImpl();
+        IRoleDao rd = new RoleDaoImpl();
+        IRoleService roleService = new RoleServiceImpl();
+        List<Role> r = rd.getList();
         List<Product> brands = dao.getLists();
-        for (Product a:brands
+        for (Role a:r
              ) {
-            System.out.println(a);
+ /*           System.out.println(a);*/
         }
     }
 }

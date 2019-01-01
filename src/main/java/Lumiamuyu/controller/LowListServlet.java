@@ -7,7 +7,6 @@ import Lumiamuyu.pojo.User;
 import Lumiamuyu.service.*;
 import Lumiamuyu.utilTest.CookiesUtil;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -15,20 +14,20 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/list")
-public class ListServlet extends HttpServlet {
+@WebServlet("/lowList")
+public class LowListServlet extends HttpServlet {
     private IProductService iservice = new ProductServiceImpl();
     private IUserService uservice = new UserServiceImpl();
     private IProductService pservice = new ProductServiceImpl();
     private IBrandService bservice = new BrandServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int pageNo = req.getParameter("pageNo")==null?1:Integer.parseInt(req.getParameter("pageNo"));
-        int pageSize=3;
+/*        int pageNo = req.getParameter("pageNo")==null?1:Integer.parseInt(req.getParameter("pageNo"));
+        int pageSize=3;*/
 
-        List<Brand> brand = bservice.getLists();
-/*        System.out.println(brand);*/
-        req.setAttribute("brand",brand);
+/*        List<Brand> brand = bservice.getLists();
+*//*        System.out.println(brand);*//*
+        req.setAttribute("brand",brand);*/
 
 
         List<Product> lists = iservice.getLists();
@@ -46,6 +45,8 @@ public class ListServlet extends HttpServlet {
         String username = cookie.getValue();
         User user = (User) session.getAttribute("user");
 
+        req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
+
 
 
 /*        if (user==null){
@@ -57,17 +58,17 @@ public class ListServlet extends HttpServlet {
             req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
         }*/
 
-        if(text==""||text==null){
+/*        if(text==""||text==null){
             ResultData data  = iservice.getLists(pageNo,pageSize);
             data.setUrl("list","");
             req.setAttribute("data",data);
             if (user==null){
                 User user1 = uservice.getUser(username);
                 session.setAttribute("user",user1);
-                req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+                req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
 
             }else {
-                req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+                req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
             }
         }else{
             ResultData data = iservice.getLists(pageNo,pageSize,text);
@@ -78,27 +79,27 @@ public class ListServlet extends HttpServlet {
             if (user==null){
                 User user1 = uservice.getUser(username);
                 session.setAttribute("user",user1);
-                req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+                req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
 
             }else {
-                req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+                req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
             }
-        }
+        }*/
 
 /*        if (user==null){
             User user1 = uservice.getUser(username);
             session.setAttribute("user",user1);
-            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+            req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
 
         }else {
-            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+            req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
         }
 
         if(text==""||text==null){
             ResultData data  = iservice.getLists(pageNo,pageSize);
             data.setUrl("list","");
             req.setAttribute("data",data);
-            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+            req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
         }else{
             ResultData data = iservice.getLists(pageNo,pageSize,text);
             String params="&text="+text;
@@ -106,7 +107,7 @@ public class ListServlet extends HttpServlet {
             System.out.println(text);
             req.setAttribute("text",text);
             req.setAttribute("data",data);
-            req.getRequestDispatcher("WEB-INF/pages/list.jsp").forward(req,resp);
+            req.getRequestDispatcher("WEB-INF/pages/lowlist.jsp").forward(req,resp);
         }*/
 
 

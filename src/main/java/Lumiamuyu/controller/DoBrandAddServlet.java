@@ -20,7 +20,7 @@ public class DoBrandAddServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String des = req.getParameter("des");
-        System.out.println(name +""+des);
+/*        System.out.println(name +""+des);*/
         Brand brand = new Brand();
         brand.setBrandDes(des);
         brand.setBrandName(name);

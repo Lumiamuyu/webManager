@@ -99,7 +99,7 @@
             background-image: url("img/delete.png");
         }
         .menu ul li.icon-exit {
-            background-image: url("img/quit.png");
+            background-image: url("img/Back.png");
         }
         .menu ul li.icon-edit {
             background-image: url("img/key.png");
@@ -107,10 +107,6 @@
         .menu ul li.icon-brand {
             background-image: url("img/brand.png");
         }
-        .menu ul li.icon-user {
-            background-image: url("img/user.png");
-        }
-
 
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
@@ -324,41 +320,10 @@
             }
         }
 
-
         #sear{
-            border:1px solid #ccc;
-            width:200px;
-            padding:10px;
-            margin:5px 15px;
-            border-radius:5px;
-        }
-
-        .bean{
             position: absolute;
-            right: 0;
-            list-style: none;
+            float: right;
         }
-
-        .bean li{
-            float: left;
-            height: 30px;
-            width: 30px;
-            line-height: 30px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .bean li a{
-            text-decoration: none;
-            color: #155fb4;
-            display: block;
-        }
-
-        .bean .page{
-            width: 80px;
-            height: 30px;
-        }
-
 
     </style>
 
@@ -375,95 +340,97 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
-        <li tabindex="0" class="icon-user" onclick="user()"><span>用户管理</span></li>
-        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
-        <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
-        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
-        <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
-        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
-        <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
-
+        <li tabindex="0" class="icon-dashboard" onclick="search()"><span>用户查询</span></li>
+        <li tabindex="0" class="icon-customers" onclick="add()"><span>用户增加</span></li>
+        <li tabindex="0" class="icon-users" onclick="update()"><span>用户修改</span></li>
+        <li tabindex="0" class="icon-settings" onclick="del()"><span>用户删除</span></li>
+        <li tabindex="0" class="icon-exit" onclick="exit()"><span>返回</span></li>
     </ul>
 </nav>
 
 <main>
-
     <div>
         <table>
-            <caption>商品查询</caption>
-            <form id="sear" method="get">
+            <caption>用户查询</caption>
+<%--            <form id="sear" method="post">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
-            </form>
+            </form>--%>
             <thead>
             <tr>
                 <th scope="col">编号</th>
-                <th scope="col">名称</th>
-                <th scope="col">价格</th>
-                <th scope="col">图片</th>
-                <th scope="col">描述</th>
-                <th scope="col">库存</th>
-               <%-- <th scope="col">品牌</th>--%>
+                <th scope="col">用户名</th>
+                <th scope="col">密码</th>
+                <th scope="col">邮箱</th>
+<%--                <th scope="col">权限</th>--%>
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${data.lists}" var="pro">
-              <%--  <c:forEach items="${pro.set}" var="b">--%>
+
+
+
+<%--            <c:forEach items="${rlist}" var="r">
+                <c:forEach items="${r.set}" var="u">
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${u.username}</td>
+                        <td>${u.password}</td>
+                        <td>${u.email}</td>
+                        <td>${r.rName}</td>
+                    </tr>
+                </c:forEach>
+            </c:forEach>--%>
+
+            <c:forEach items="${list}" var="l">
                 <tr>
-                    <td>${pro.productId}</td>
-                    <td>${pro.productName}</td>
-                    <td>${pro.price}</td>
-                    <td><img src="${pro.url}" height="50px" alt="pic"></td>
-                    <td>${pro.productDes}</td>
-                    <td>${pro.reverse}</td>
-                   <%-- <td>${b.brandName}</td>--%>
+                    <td>${l.id}</td>
+                    <td>${l.username}</td>
+                    <td>${l.password}</td>
+                    <td>${l.email}</td>
                 </tr>
-                <%--</c:forEach>--%>
             </c:forEach>
 
+<%--            <c:forEach items="${roleList}" var="r">
+                <c:forEach items="${r.set}" var="u">
+                    <tr>
+                        <td>${u.id}</td>
+                        <td>${u.username}</td>
+                        <td>${u.password}</td>
+                        <td>${u.email}</td>
+                        <td>${r.rname}</td>
+                    </tr>
+                </c:forEach>
+            </c:forEach>--%>
 
             </tbody>
         </table>
-        <ul class="bean">
-            ${data.pageView}
-        </ul>
     </div>
 
-<%--    <div class="helper">
 
-&lt;%&ndash;        RESIZE THE WINDOW
-        <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
-
-    </div>--%>
 </main>
 
 
 
-<script src="js/index.js"></script>
+<script  src="js/index.js"></script>
 <script type="text/javascript">
-    function user() {
-        window.location.href="userList";
-    }
-
     function brand() {
         window.location.href="brandlist";
     }
 
     function search(){
-        window.location.href="list";
+        window.location.href="userList";
     }
     function add(){
-        window.location.href="add";
+        window.location.href="userAdd";
     }
     function update(){
-        window.location.href="updateView";
+        window.location.href="userUpdateView";
     }
     function del(){
-        window.location.href="delete";
+        window.location.href="userDelete";
     }
     function exit(){
-        window.location.href="exit";
+        window.location.href="list";
     }
 
     function edit(){

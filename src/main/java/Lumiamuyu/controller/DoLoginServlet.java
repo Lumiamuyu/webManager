@@ -19,7 +19,7 @@ public class DoLoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         User user = uservice.getUser(username);
-
+        int rid = user.getRid();
         if (user!=null) {
             /*resp.sendRedirect("register");*/
             if (user.getPassword().equals(password)) {
@@ -32,7 +32,12 @@ public class DoLoginServlet extends HttpServlet {
                 resp.addCookie(ucookie);
                 resp.addCookie(pcookie);
                 session.setAttribute("user", user);
-                resp.sendRedirect("list");
+                if (rid==1){
+                    resp.sendRedirect("lowList");
+                }else {
+                    resp.sendRedirect("list");
+                }
+
             } else {
                 resp.getWriter().write("3");
             }

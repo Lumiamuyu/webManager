@@ -99,7 +99,7 @@
             background-image: url("img/delete.png");
         }
         .menu ul li.icon-exit {
-            background-image: url("img/quit.png");
+            background-image: url("img/Back.png");
         }
         .menu ul li.icon-edit {
             background-image: url("img/key.png");
@@ -107,10 +107,6 @@
         .menu ul li.icon-brand {
             background-image: url("img/brand.png");
         }
-        .menu ul li.icon-user {
-            background-image: url("img/user.png");
-        }
-
 
         .menu ul li:hover {
             background-color: rgba(0, 0, 0, 0.1);
@@ -237,126 +233,26 @@
                 pointer-events: none;
             }
         }
-        a{
-            text-decoration: none;
-            color: white;
-        }
 
-        table {
-            border: 1px solid #ccc;
-            border-collapse: collapse;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            table-layout: fixed;
-        }
-
-        table caption {
-            font-size: 1.5em;
-            margin: .5em 0 .75em;
-            color: #155fb4;
-        }
-
-        table tr {
-            background-color: #236eb4;
-            border: 1px solid #ddd;
-            padding: .35em;
-        }
-
-        table th,
-        table td {
-            padding: .625em;
-            text-align: center;
-        }
-
-        table th {
-            font-size: .85em;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-        }
-
-        @media screen and (max-width: 600px) {
-            table {
-                border: 0;
-            }
-
-            table caption {
-                font-size: 1.3em;
-            }
-
-            table thead {
-                border: none;
-                clip: rect(0 0 0 0);
-                height: 1px;
-                margin: -1px;
-                overflow: hidden;
-                padding: 0;
-                position: absolute;
-                width: 1px;
-            }
-
-            table tr {
-                border-bottom: 3px solid #ddd;
-                display: block;
-                margin-bottom: .625em;
-            }
-
-            table td {
-                border-bottom: 1px solid #ddd;
-                display: block;
-                font-size: .8em;
-                text-align: right;
-            }
-
-            table td::before {
-                /*
-                * aria-label has no advantage, it won't be read inside a table
-                content: attr(aria-label);
-                */
-                content: attr(data-label);
-                float: left;
-                font-weight: bold;
-                text-transform: uppercase;
-            }
-
-            table td:last-child {
-                border-bottom: 0;
-            }
-        }
-
-
-        #sear{
+        input {
             border:1px solid #ccc;
             width:200px;
             padding:10px;
             margin:5px 15px;
             border-radius:5px;
         }
-
-        .bean{
-            position: absolute;
-            right: 0;
-            list-style: none;
+        .send {
+            width:220px;
         }
 
-        .bean li{
-            float: left;
-            height: 30px;
-            width: 30px;
-            line-height: 30px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .bean li a{
-            text-decoration: none;
+        h1{
+            margin-left: 15px;
             color: #155fb4;
-            display: block;
         }
 
-        .bean .page{
-            width: 80px;
-            height: 30px;
+        form{
+            color: #155fb4;
+            padding-left: 15px;
         }
 
 
@@ -375,100 +271,110 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
-        <li tabindex="0" class="icon-user" onclick="user()"><span>用户管理</span></li>
-        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
-        <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
-        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
-        <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
-        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
-        <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
-
+        <li tabindex="0" class="icon-dashboard" onclick="search()"><span>用户查询</span></li>
+        <li tabindex="0" class="icon-customers" onclick="add()"><span>用户增加</span></li>
+        <li tabindex="0" class="icon-users" onclick="update()"><span>用户修改</span></li>
+        <li tabindex="0" class="icon-settings" onclick="del()"><span>用户删除</span></li>
+        <li tabindex="0" class="icon-exit" onclick="exit()"><span>返回</span></li>
     </ul>
 </nav>
 
 <main>
-
     <div>
-        <table>
-            <caption>商品查询</caption>
-            <form id="sear" method="get">
-                <input type="text" name="text" value="${text}">
-                <input type="submit" value="搜索">
-            </form>
-            <thead>
-            <tr>
-                <th scope="col">编号</th>
-                <th scope="col">名称</th>
-                <th scope="col">价格</th>
-                <th scope="col">图片</th>
-                <th scope="col">描述</th>
-                <th scope="col">库存</th>
-               <%-- <th scope="col">品牌</th>--%>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${data.lists}" var="pro">
-              <%--  <c:forEach items="${pro.set}" var="b">--%>
-                <tr>
-                    <td>${pro.productId}</td>
-                    <td>${pro.productName}</td>
-                    <td>${pro.price}</td>
-                    <td><img src="${pro.url}" height="50px" alt="pic"></td>
-                    <td>${pro.productDes}</td>
-                    <td>${pro.reverse}</td>
-                   <%-- <td>${b.brandName}</td>--%>
-                </tr>
-                <%--</c:forEach>--%>
-            </c:forEach>
-
-
-            </tbody>
-        </table>
-        <ul class="bean">
-            ${data.pageView}
-        </ul>
+        <h1>用户添加</h1>
     </div>
 
-<%--    <div class="helper">
+    <div>
+        <form action="doUserAdd" method="post">
+            用户名称<input class='required' name="name" placeholder='用户名称' type='text'>
 
-&lt;%&ndash;        RESIZE THE WINDOW
-        <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
+            <div id='br'>
+                密码<input class='required' name="pwd" placeholder='密码' type='text'>
+            </div>
+            <div id='br'>
+                邮箱<input class='required' name="email" placeholder='邮箱' type='text'>
+            </div>
 
-    </div>--%>
+
+            <%--        <div id='br'>
+                        <input placeholder='Phone' type='text'>
+                    </div>--%>
+            <div id='br'>
+                <input class='send' type='submit' value='确认添加'>
+            </div>
+        </form>
+
+    </div>
+
+    <%--    <div class="helper">
+
+    &lt;%&ndash;        RESIZE THE WINDOW
+            <span>Breakpoints on 900px and 400px</span>&ndash;%&gt;
+
+        </div>--%>
 </main>
 
-
-
-<script src="js/index.js"></script>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-    function user() {
-        window.location.href="userList";
-    }
-
     function brand() {
         window.location.href="brandlist";
     }
 
     function search(){
-        window.location.href="list";
+        window.location.href="userList";
     }
     function add(){
-        window.location.href="add";
+        window.location.href="userAdd";
     }
     function update(){
-        window.location.href="updateView";
+        window.location.href="userUpdateView";
     }
     function del(){
-        window.location.href="delete";
+        window.location.href="userDelete";
     }
     function exit(){
-        window.location.href="exit";
+        window.location.href="list";
     }
 
     function edit(){
         window.location.href="profileedit";
     }
+
+    jQuery('document').ready(function($) {
+        $('.required').keyup(function() {
+
+            var empty = false;
+            $('.required').each(function() {
+                if ($(this).val() === '') {
+                    empty = true;
+                }
+            });
+
+            if (empty) {
+                $('.send').prop('disabled', true);
+                $('.send').css('background-color', '#ccc');
+            } else {
+                $('.send').prop('disabled', false);
+                $('.send').css({'background-color': '#21759b','color':'#ffffff'});
+            }
+        });
+    });
+
+    function imgChange(obj){
+        var les = (obj.files[0].name).substr((obj.files[0].name).indexOf(".")+1);
+        if (les=="jpg"||les=="png"||les=="jpeg"||les=="gif"){
+            var reader = new FileReader();
+            reader.onload=function (e) {
+                var img = document.getElementById("img");
+                img.src=e.target.result;
+            }
+            reader.readAsDataURL(obj.files[0]);
+        }else {
+            img.src="";
+        }
+    }
+
+
 </script>
 
 
@@ -477,3 +383,4 @@
 </body>
 
 </html>
+

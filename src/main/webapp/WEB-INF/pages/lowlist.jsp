@@ -375,13 +375,7 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
-        <li tabindex="0" class="icon-user" onclick="user()"><span>用户管理</span></li>
-        <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard"><span>查询</span></li>
-        <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
-        <li tabindex="0" class="icon-users" onclick="update()"><span>修改</span></li>
-        <li tabindex="0" class="icon-settings" onclick="del()"><span>删除</span></li>
-        <li tabindex="0" class="icon-edit" onclick="edit()"><span>修改密码</span></li>
         <li tabindex="0" class="icon-exit" onclick="exit()"><span>退出</span></li>
 
     </ul>
@@ -392,10 +386,10 @@
     <div>
         <table>
             <caption>商品查询</caption>
-            <form id="sear" method="get">
+<%--            <form id="sear" method="get">
                 <input type="text" name="text" value="${text}">
                 <input type="submit" value="搜索">
-            </form>
+            </form>--%>
             <thead>
             <tr>
                 <th scope="col">编号</th>
@@ -408,7 +402,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${data.lists}" var="pro">
+            <c:forEach items="${lists}" var="pro">
               <%--  <c:forEach items="${pro.set}" var="b">--%>
                 <tr>
                     <td>${pro.productId}</td>

@@ -86,6 +86,9 @@
             transition: all 0.15s linear;
             cursor: pointer;
         }
+        .menu ul li.icon-user {
+            background-image: url("img/user.png");
+        }
         .menu ul li.icon-dashboard {
             background-image: url("img/search.png");
         }
@@ -282,6 +285,7 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
+        <li tabindex="0" class="icon-user" onclick="user()"><span>用户管理</span></li>
         <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
         <li tabindex="0" class="icon-customers" ><span>增加</span></li>
@@ -351,6 +355,10 @@
 
 <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+
+    function user() {
+        window.location.href="userList";
+    }
     function edit(){
         window.location.href="profileedit";
     }

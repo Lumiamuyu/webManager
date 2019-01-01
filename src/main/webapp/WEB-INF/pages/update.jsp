@@ -98,6 +98,9 @@
         .menu ul li.icon-settings {
             background-image: url("img/delete.png");
         }
+        .menu ul li.icon-user {
+            background-image: url("img/user.png");
+        }
         .menu ul li.icon-exit {
             background-image: url("img/quit.png");
         }
@@ -363,6 +366,7 @@
         <h2>${user.username}</h2>
     </header>
     <ul>
+        <li tabindex="0" class="icon-user" onclick="user()"><span>用户管理</span></li>
         <li tabindex="0" class="icon-brand" onclick="brand()"><span>品牌管理</span></li>
         <li tabindex="0" class="icon-dashboard" onclick="search()"><span>查询</span></li>
         <li tabindex="0" class="icon-customers" onclick="add()"><span>增加</span></li>
@@ -449,6 +453,10 @@
 
 <script  src="js/index.js"></script>
 <script type="text/javascript">
+
+    function user() {
+        window.location.href="userList";
+    }
     function edit(){
         window.location.href="profileedit";
     }
